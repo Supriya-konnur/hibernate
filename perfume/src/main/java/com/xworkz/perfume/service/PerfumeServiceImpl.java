@@ -1,5 +1,7 @@
 package com.xworkz.perfume.service;
 
+import java.util.List;
+
 import com.xworkz.perfume.dao.PerfumeDAO;
 import com.xworkz.perfume.dao.PerfumeDAOImpl;
 import com.xworkz.perfume.dto.PerfumeDTO;
@@ -50,6 +52,36 @@ public class PerfumeServiceImpl implements PerfumeService {
 			System.out.println("Name cant be null");
 		}
 
+	}
+
+	@Override
+	public List<PerfumeDTO> getAllPerfume() {
+		// TODO Auto-generated method stub
+		return pDAO.getAllPerfume();
+	}
+
+	@Override
+	public PerfumeDTO getPerfumeByPerfumeId(int id) {
+		// TODO Auto-generated method stub
+		return pDAO.getPerfumeByPerfumeId(id);
+	}
+
+	@Override
+	public String getCompanyNameByPerfumeName(String perfumeName) {
+
+		return pDAO.getCompanyNameByPerfumeName(perfumeName);
+	}
+
+	@Override
+	public Object[] getNameAndPriceByCompany(String company) {
+		// TODO Auto-generated method stub
+		return pDAO.getNameAndPriceByCompany(company);
+	}
+
+	@Override
+	public List<Object[]> getAllNameAndPriceByCompany(String cname) {
+		// TODO Auto-generated method stub
+		return pDAO.getAllNameAndPriceByCompany(cname);
 	}
 
 }

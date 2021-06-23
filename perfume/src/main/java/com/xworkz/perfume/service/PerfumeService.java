@@ -1,5 +1,7 @@
 package com.xworkz.perfume.service;
 
+import java.util.List;
+
 import com.xworkz.perfume.dto.PerfumeDTO;
 
 public interface PerfumeService {
@@ -10,4 +12,14 @@ public interface PerfumeService {
 	public void validateAndUpdatePriceByName(int id, String name, double price);
 	
 	public void validateAndDelete(int id, String name);
+	
+	public List<PerfumeDTO> getAllPerfume();
+
+	public PerfumeDTO getPerfumeByPerfumeId(int id);
+
+	public String getCompanyNameByPerfumeName(String perfumeName);
+
+	public Object[] getNameAndPriceByCompany(String company);
+	
+	public List<Object[]> getAllNameAndPriceByCompany(String cname);
 }
