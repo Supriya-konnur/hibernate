@@ -11,6 +11,7 @@ import javax.persistence.Table;
 @Table(name = "sweets")
 public class SweetDTO implements Serializable {
 
+	
 	@Id
 	@Column(name = "sweet_id")
 	private int sweet_id;
