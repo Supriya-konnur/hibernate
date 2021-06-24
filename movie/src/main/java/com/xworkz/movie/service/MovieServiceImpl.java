@@ -86,4 +86,34 @@ public class MovieServiceImpl implements MovieService {
 		return null;
 	}
 
+	@Override
+	public List<Object[]> getAllNameAndRatingByLanguage() {
+		// TODO Auto-generated method stub
+		return mDAO.getNameAndRatingByLanguage();
+	}
+
+	@Override
+	public int updateLanguageByName(String language, String name) {
+		if(language != null && name != null) {
+			return mDAO.updateLanguageByName(language,name);
+		}
+		return 0;
+	}
+
+	@Override
+	public int updateRatingByName(int rating, String name) {
+		if(rating >0 && name != null) {
+			return mDAO.updateRatingByName(rating,name);
+		}
+		return 0;
+	}
+
+	@Override
+	public int deleteMovieByLanguage(String language) {
+		if(language != null) {
+			return mDAO.deleteMovieByLanguage(language);
+		}
+		return 0;
+	}
+
 }

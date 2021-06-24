@@ -34,13 +34,28 @@ public class MovieTester {
 		
 //		String language = service.getMovieLanguageByMovieName("KGF");
 //		System.out.println(language);
+//		
+//		Object[] object = service.getNameAndRatingByLanguage("English");
+//		for (Object object2 : object) {
+//			System.out.println(object2);
+//		}
+//		
+//		List<Object[]> list = service.getAllNameAndRatingByLanguage();
+//		for (Object[] objects : list) {
+//			for (Object objects2 : objects) {
+//				System.out.println(objects2);
+//			}
+//		}
 		
-		Object[] object = service.getNameAndRatingByLanguage("English");
-		for (Object object2 : object) {
-			System.out.println(object2);
-		}
+//		int i = service.updateLanguageByName("Kannada", "Roberrt");
+//		System.out.println(i);
 		
-		
+//		int j = service.updateRatingByName(3, "Ala Vaikunthapurramuloo");
+//		System.out.println(j);
+	
+		int k = service.deleteMovieByLanguage("telugu");
+		System.out.println(k);
+	
 	}
 
 }

@@ -14,10 +14,18 @@ public interface MovieService {
 	void validateAndUpdateRatingByName(int id, String name, int rating);
 
 	public List<MovieDTO> getAllMovies();
-	
+
 	public MovieDTO getMovieByMovieId(int id);
-	
+
 	public String getMovieLanguageByMovieName(String movieName);
-	
+
 	public Object[] getNameAndRatingByLanguage(String language);
+
+	public List<Object[]> getAllNameAndRatingByLanguage();
+
+	public int updateLanguageByName(String language, String name);
+
+	public int updateRatingByName(int rating, String name);
+
+	public int deleteMovieByLanguage(String language);
 }

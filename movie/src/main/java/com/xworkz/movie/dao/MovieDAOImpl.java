@@ -11,7 +11,6 @@ import org.hibernate.Transaction;
 import com.xworkz.movie.dto.MovieDTO;
 import com.xworkz.singleton.HibernateUtil;
 
-
 public class MovieDAOImpl implements MovieDAO {
 
 	SessionFactory sessionFactory = null;
@@ -120,9 +119,8 @@ public class MovieDAOImpl implements MovieDAO {
 			return dtos;
 		} catch (Exception e) {
 			e.printStackTrace();
-		}
-		finally {
-			if(session != null) {
+		} finally {
+			if (session != null) {
 				session.close();
 			}
 		}
@@ -132,19 +130,18 @@ public class MovieDAOImpl implements MovieDAO {
 	@Override
 	public MovieDTO getMovieByMovieId(int id) {
 		Session session = null;
-		String hql = "select dto from MovieDTO dto where dto.movie_id="+id+"";
+		String hql = "select dto from MovieDTO dto where dto.movie_id=" + id + "";
 		MovieDTO movieDTO = new MovieDTO();
 		try {
-			session=HibernateUtil.getSessionFactory().openSession();
+			session = HibernateUtil.getSessionFactory().openSession();
 			Query query = session.createQuery(hql);
 			movieDTO = (MovieDTO) query.uniqueResult();
 		} catch (Exception e) {
 			// TODO: handle exception
-		}
-		finally {
-			if(session != null) {
+		} finally {
+			if (session != null) {
 				session.close();
-			}else {
+			} else {
 				System.out.println("session cannot be closed");
 			}
 		}
@@ -155,21 +152,21 @@ public class MovieDAOImpl implements MovieDAO {
 	public String getMovieLanguageByMovieName(String movieName) {
 		Session session = null;
 		String movielanguage = null;
-		String hql = "select dto.language from MovieDTO  dto where dto.movieName='"+movieName+"'";
+		String hql = "select dto.language from MovieDTO  dto where dto.movieName='" + movieName + "'";
 		try {
-			session=HibernateUtil.getSessionFactory().openSession();
+			session = HibernateUtil.getSessionFactory().openSession();
 			Query query = session.createQuery(hql);
 			movielanguage = (String) query.uniqueResult();
 		} catch (HibernateException e) {
 			e.printStackTrace();
-		}finally {
-			if(session != null) {
+		} finally {
+			if (session != null) {
 				session.clear();
-			}else {
-				
+			} else {
+
 				System.out.println("session cannot be closed");
 			}
-			if(HibernateUtil.getSessionFactory() != null) {
+			if (HibernateUtil.getSessionFactory() != null) {
 				HibernateUtil.getSessionFactory().close();
 			}
 		}
@@ -180,27 +177,133 @@ public class MovieDAOImpl implements MovieDAO {
 	public Object[] getNameAndRatingByLanguage(String language) {
 		Session session = null;
 		Object[] movieNameAndRating = null;
-		String hql = "select dto.movieName, dto.movieRating from MovieDTO dto where dto.language='"+language+"'";
+		String hql = "select dto.movieName, dto.movieRating from MovieDTO dto where dto.language='" + language + "'";
 		try {
-			session=HibernateUtil.getSessionFactory().openSession();
+			session = HibernateUtil.getSessionFactory().openSession();
 			Query query = session.createQuery(hql);
 			movieNameAndRating = (Object[]) query.uniqueResult();
 			return movieNameAndRating;
 		} catch (HibernateException e) {
 			e.printStackTrace();
-		}
-		finally {
-			if(session != null) {
+		} finally {
+			if (session != null) {
 				session.close();
-			}else {
-				
+			} else {
+
 				System.out.println("session cannot be closed");
 			}
-			if(HibernateUtil.getSessionFactory() != null) {
+			if (HibernateUtil.getSessionFactory() != null) {
 				HibernateUtil.getSessionFactory().close();
 			}
 		}
 		return null;
+	}
+
+	@Override
+	public List<Object[]> getNameAndRatingByLanguage() {
+		Session session = null;
+		List<Object[]> movieNameAndRating = null;
+		String hql = "select dto.movieName, dto.movieRating from MovieDTO dto";
+		try {
+			session = HibernateUtil.getSessionFactory().openSession();
+			Query query = session.createQuery(hql);
+			movieNameAndRating = query.list();
+			return movieNameAndRating;
+		} catch (HibernateException e) {
+			e.printStackTrace();
+		} finally {
+			if (session != null) {
+				session.close();
+			} else {
+
+				System.out.println("session cannot be closed");
+			}
+			if (HibernateUtil.getSessionFactory() != null) {
+				HibernateUtil.getSessionFactory().close();
+			}
+		}
+		return null;
+	}
+
+	@Override
+	public int updateLanguageByName(String language, String name) {
+		Session session = null;
+		int noOfRowAffected = 0;
+		String hql = "update MovieDTO dto set dto.language='"+language+"' where dto.movieName='"+name+"'";
+		try {
+			session = HibernateUtil.getSessionFactory().openSession();
+			Query query = session.createQuery(hql);
+			noOfRowAffected = query.executeUpdate();
+			
+		} catch (HibernateException e) {
+			e.printStackTrace();
+		} finally {
+			if (session != null) {
+				session.close();
+			} else {
+
+				System.out.println("session cannot be closed");
+			}
+			if (HibernateUtil.getSessionFactory() != null) {
+				HibernateUtil.getSessionFactory().close();
+			}
+		}
+
+		return noOfRowAffected;
+	}
+
+	@Override
+	public int updateRatingByName(int rating, String name) {
+		Session session = null;
+		int noOfRowAffected = 0;
+		String hql = "update MovieDTO dto set dto.movieRating='"+rating+"' where dto.movieName='"+name+"'";
+		try {
+			session = HibernateUtil.getSessionFactory().openSession();
+			Query query = session.createQuery(hql);
+			noOfRowAffected = query.executeUpdate();
+			
+		} catch (HibernateException e) {
+			e.printStackTrace();
+		} finally {
+			if (session != null) {
+				session.close();
+			} else {
+
+				System.out.println("session cannot be closed");
+			}
+			if (HibernateUtil.getSessionFactory() != null) {
+				HibernateUtil.getSessionFactory().close();
+			}
+		}
+
+		return noOfRowAffected;
+	}
+
+	@Override
+	public int deleteMovieByLanguage(String language) {
+		Session session = null;
+		int noOfAffected = 0;
+		String hql = "delete dto from MovieDTO dto where dto.language='"+language+"'";
+		try {
+			session = HibernateUtil.getSessionFactory().openSession();
+			Query query = session.createQuery(hql);
+			noOfAffected = query.executeUpdate();
+		} catch (HibernateException e) {
+			e.printStackTrace();
+		} finally {
+			if (session != null) {
+				session.close();
+			} else {
+
+				System.out.println("session cannot be closed");
+			}
+			if (HibernateUtil.getSessionFactory() != null) {
+				HibernateUtil.getSessionFactory().close();
+			}
+		}
+
+
+		return noOfAffected;
 	}
 
 }
