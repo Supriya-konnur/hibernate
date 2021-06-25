@@ -107,13 +107,13 @@ public class Tester {
 		try {
 			XSSFWorkbook work=new XSSFWorkbook(new FileInputStream(file));
 			XSSFSheet sheet=work.getSheet("Sheet1");
-		//XSSFRow row=sheet.getRow(1);
+		
 			XSSFRow row =null;
 			
 			int i=1;
 			while((row=sheet.getRow(i))!=null) {
 				SupermarketDTO sdto=new SupermarketDTO();
-			
+				
 				sdto.setSupermarket_name(row.getCell(1).getStringCellValue());
 				
 			
@@ -121,8 +121,8 @@ public class Tester {
 			//sdto.setNo_of_items(row.getCell(3).getNumericCellValue());
 			int n =(int)(row.getCell(3).getNumericCellValue());
 			sdto.setNo_of_items(n);
-			int m=(int)(row.getCell(4).getNumericCellValue());
-			sdto.setPrice(m);
+			
+			sdto.setPrice(row.getCell(4).getNumericCellValue());
 			i++;
 			SupermarketService iService = new SupermarketServiceImpl();
 			iService.valideAndSave(sdto);
