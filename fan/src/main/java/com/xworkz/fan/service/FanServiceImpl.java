@@ -1,22 +1,23 @@
-package com.xworkz.perfume.service;
+package com.xworkz.fan.service;
 
 import java.util.List;
 
-import com.xworkz.perfume.dao.PerfumeDAO;
-import com.xworkz.perfume.dao.PerfumeDAOImpl;
-import com.xworkz.perfume.dto.PerfumeDTO;
+import com.xworkz.fan.dao.FanDAO;
+import com.xworkz.fan.dao.FanDAOImpl;
+import com.xworkz.fan.dto.FanDTO;
 
-public class PerfumeServiceImpl implements PerfumeService {
-	private PerfumeDAO pDAO;
+public class FanServiceImpl implements FanService{
 
-	public PerfumeServiceImpl() {
-		pDAO = new PerfumeDAOImpl();
+	private FanDAO pDAO;
+	
+	public FanServiceImpl() {
+		pDAO = new FanDAOImpl();
 	}
-
 	@Override
-	public void valideAndSave(PerfumeDTO perfumeDTO) {
-		if (perfumeDTO != null) {
-			pDAO.save(perfumeDTO);
+	public void save(FanDTO fanDTO) {
+		// TODO Auto-generated method stub
+		if (fanDTO != null) {
+			pDAO.save(fanDTO);
 		} else {
 			System.out.println("object cant be empty");
 		}
@@ -24,18 +25,18 @@ public class PerfumeServiceImpl implements PerfumeService {
 	}
 
 	@Override
-	public PerfumeDTO validateAndGetByName(int id) {
+	public FanDTO getFanByName(int id) {
 		if (id > 0) {
-			return pDAO.getPerfumeByName(id);
+			return pDAO.getFanByName(id);
 		} else {
 			System.out.println("Name cant be null");
 		}
 		return null;
-
 	}
 
 	@Override
-	public void validateAndUpdatePriceByName(int id, String name, double price) {
+	public void updatePriceByName(int id, String name, double price) {
+		// TODO Auto-generated method stub
 		if (name != null) {
 			pDAO.updatePriceByName(id, name, price);
 		} else {
@@ -45,7 +46,8 @@ public class PerfumeServiceImpl implements PerfumeService {
 	}
 
 	@Override
-	public void validateAndDelete(int id, String name) {
+	public void deleteByName(int id, String name) {
+		// TODO Auto-generated method stub
 		if (name != null) {
 			pDAO.deleteByName(id, name);
 		} else {
@@ -55,33 +57,33 @@ public class PerfumeServiceImpl implements PerfumeService {
 	}
 
 	@Override
-	public List<PerfumeDTO> getAllPerfume() {
+	public List<FanDTO> getAllFan() {
 		// TODO Auto-generated method stub
-		return pDAO.getAllPerfume();
+		return pDAO.getAllFan();
 	}
 
 	@Override
-	public PerfumeDTO getPerfumeByPerfumeId(int id) {
+	public FanDTO getFanByFanId(int id) {
 		// TODO Auto-generated method stub
-		return pDAO.getPerfumeByPerfumeId(id);
+		return pDAO.getFanByFanId(id);
 	}
 
 	@Override
-	public String getCompanyNameByPerfumeName(String perfumeName) {
-
-		return pDAO.getCompanyNameByPerfumeName(perfumeName);
+	public String getColorByFanName(String fanName) {
+		// TODO Auto-generated method stub
+		return pDAO.getColorByFanName(fanName);
 	}
 
 	@Override
-	public Object[] getNameAndPriceByCompany(String company) {
+	public Object[] getNameAndPriceByColor(String fname) {
 		// TODO Auto-generated method stub
-		return pDAO.getNameAndPriceByCompany(company);
+		return pDAO.getNameAndPriceByColor(fname);
 	}
 
 	@Override
-	public List<Object[]> getAllNameAndPriceByCompany(String cname) {
+	public List<Object[]> getAllNameAndPriceByColor(String color) {
 		// TODO Auto-generated method stub
-		return pDAO.getAllNameAndPriceByCompany(cname);
+		return pDAO.getAllNameAndPriceByColor(color);
 	}
 
 	@Override
@@ -94,16 +96,17 @@ public class PerfumeServiceImpl implements PerfumeService {
 	}
 
 	@Override
-	public int updateCompanyByName(String name, String company) {
+	public int updateColorByName(String name, String color) {
 		// TODO Auto-generated method stub
 		if(name!=null) {
-			return pDAO.updateCompanyByName(name,company);
+			return pDAO.updateColorByName(name,color);
 		}
 		return 0;
 	}
 
 	@Override
 	public int deleteByName(String name) {
+		// TODO Auto-generated method stub
 		if(name!=null) {
 			return pDAO.deleteByName(name);
 		}

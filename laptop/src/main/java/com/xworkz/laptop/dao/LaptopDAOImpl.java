@@ -1,4 +1,4 @@
-package com.xworkz.perfume.dao;
+package com.xworkz.laptop.dao;
 
 import java.util.List;
 
@@ -8,16 +8,16 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 
-import com.xworkz.perfume.dto.PerfumeDTO;
+import com.xworkz.laptop.dto.LaptopDTO;
 import com.xworkz.singleton.HibernateUtil;
 
-public class PerfumeDAOImpl implements PerfumeDAO {
-
+public class LaptopDAOImpl implements LaptopDAO{
 	SessionFactory sessionFactory = null;
 	Session session = null;
-
+Transaction transaction =null;
 	@Override
-	public void save(PerfumeDTO perfumeDTO) {
+	public void save(LaptopDTO laptopDTO) {
+		// TODO Auto-generated method stub
 
 		Transaction transaction = null;
 		try {
@@ -26,7 +26,7 @@ public class PerfumeDAOImpl implements PerfumeDAO {
 
 			session = sessionFactory.openSession();
 			transaction = session.beginTransaction();
-			session.save(perfumeDTO);
+			session.save(laptopDTO);
 			transaction.commit();
 
 		} catch (HibernateException e) {
@@ -42,22 +42,23 @@ public class PerfumeDAOImpl implements PerfumeDAO {
 	}
 
 	@Override
-	public PerfumeDTO getPerfumeByName(int id) {
+	public LaptopDTO getLaptopByName(int id) {
+		// TODO Auto-generated method stub
 		try {
 			session = HibernateUtil.getSessionFactory().openSession();
-			PerfumeDTO perfumeDTO = session.get(PerfumeDTO.class, id);
+			LaptopDTO laptopDTO = session.get(LaptopDTO.class, id);
 
-			return perfumeDTO;
+			return laptopDTO;
 		} finally {
 			if (session != null) {
 				session.close();
 			}
-
 		}
 	}
 
 	@Override
 	public void updatePriceByName(int id, String name, double price) {
+		// TODO Auto-generated method stub
 		Transaction transaction = null;
 		try {
 
@@ -66,10 +67,10 @@ public class PerfumeDAOImpl implements PerfumeDAO {
 			session = sessionFactory.openSession();
 			transaction = session.beginTransaction();
 
-			PerfumeDTO perfumeDTO = session.get(PerfumeDTO.class, id);
-			perfumeDTO.setPerfumePrice(price);
+			LaptopDTO laptopDTO = session.get(LaptopDTO.class, id);
+			laptopDTO.setLaptopPrice(price);
 
-			session.update(perfumeDTO);
+			session.update(laptopDTO);
 			transaction.commit();
 
 		} catch (HibernateException e) {
@@ -81,20 +82,19 @@ public class PerfumeDAOImpl implements PerfumeDAO {
 				session.close();
 			}
 		}
-
 	}
 
 	@Override
 	public void deleteByName(int id, String name) {
-
+		// TODO Auto-generated method stub
 		Transaction transaction = null;
 		try {
 			sessionFactory = HibernateUtil.getSessionFactory();
 
 			session = sessionFactory.openSession();
 			transaction = session.beginTransaction();
-			PerfumeDTO perfumeDTO = session.get(PerfumeDTO.class, id);
-			session.delete(perfumeDTO);
+			LaptopDTO laptopDTO = session.get(LaptopDTO.class, id);
+			session.delete(laptopDTO);
 			transaction.commit();
 
 		} catch (HibernateException e) {
@@ -110,16 +110,16 @@ public class PerfumeDAOImpl implements PerfumeDAO {
 			}
 
 		}
-
 	}
 
 	@Override
-	public List<PerfumeDTO> getAllPerfume() {
+	public List<LaptopDTO> getAllLoptop() {
+		// TODO Auto-generated method stub
 		Session session = null;
 		try {
 			session = HibernateUtil.getSessionFactory().openSession();
-			Query query = session.createQuery("select dto from PerfumeDTO dto");
-			List<PerfumeDTO> dtos = query.list();
+			Query query = session.createQuery("select dto from LaptopDTO dto");
+			List<LaptopDTO> dtos = query.list();
 			return dtos;
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -129,18 +129,20 @@ public class PerfumeDAOImpl implements PerfumeDAO {
 			}
 		}
 		return null;
+		
 	}
 
 	@Override
-	public PerfumeDTO getPerfumeByPerfumeId(int id) {
+	public LaptopDTO getLaptopByLaptopId(int id) {
+		// TODO Auto-generated method stub
 		Session session = null;
-		String hql = "select dto from PerfumeDTO dto where dto.perfumeId=:pid";
-		PerfumeDTO perfumeDTO = new PerfumeDTO();
+		String hql = "select dto from LaptopDTO dto where dto.laptopId=:pid";
+		LaptopDTO laptopDTO = new LaptopDTO();
 		try {
 			session = HibernateUtil.getSessionFactory().openSession();
 			Query query = session.createQuery(hql);
 			query.setParameter("pid", id);
-			perfumeDTO = (PerfumeDTO) query.uniqueResult();
+			laptopDTO = (LaptopDTO) query.uniqueResult();
 		} catch (Exception e) {
 			// TODO: handle exception
 		} finally {
@@ -150,20 +152,20 @@ public class PerfumeDAOImpl implements PerfumeDAO {
 				System.out.println("session cannot be closed");
 			}
 		}
-		return perfumeDTO;
-
+		return laptopDTO;
 	}
 
 	@Override
-	public String getCompanyNameByPerfumeName(String pname) {
+	public String getColorByLaptopName(String pname) {
+		// TODO Auto-generated method stub
 		Session session = null;
-		String companyName = null;
-		String hql = "select dto.perfumeCompany from PerfumeDTO  dto where dto.perfumeName=:pm";
+		String color = null;
+		String hql = "select dto.laptopColor from LaptopDTO  dto where dto.laptopName=:pm";
 		try {
 			session = HibernateUtil.getSessionFactory().openSession();
 			Query query = session.createQuery(hql);
 			query.setParameter("pm", pname);
-			companyName = (String) query.uniqueResult();
+			color = (String) query.uniqueResult();
 		} catch (HibernateException e) {
 			e.printStackTrace();
 		} finally {
@@ -177,18 +179,19 @@ public class PerfumeDAOImpl implements PerfumeDAO {
 				HibernateUtil.getSessionFactory().close();
 			}
 		}
-		return companyName;
+		return color;
 	}
 
 	@Override
-	public Object[] getNameAndPriceByCompany(String company) {
+	public Object[] getNameAndPriceByColor(String color) {
+		// TODO Auto-generated method stub
 		Session session = null;
 		Object[] nameAndPrice = null;
-		String hql = "select dto.perfumeName, dto.perfumePrice from PerfumeDTO dto where dto.perfumeCompany=:pc";
+		String hql = "select dto.laptopName, dto.laptopPrice from LaptopDTO dto where dto.laptopColor=:pc";
 		try {
 			session = HibernateUtil.getSessionFactory().openSession();
 			Query query = session.createQuery(hql);
-			query.setParameter("pc", company);
+			query.setParameter("pc", color);
 			nameAndPrice = (Object[]) query.uniqueResult();
 			return nameAndPrice;
 		} catch (HibernateException e) {
@@ -207,13 +210,12 @@ public class PerfumeDAOImpl implements PerfumeDAO {
 		return null;
 	}
 
-	Transaction transaction = null;
-
 	@Override
-	public List<Object[]> getAllNameAndPriceByCompany(String cname) {
+	public List<Object[]> getAllNameAndPriceByColor(String cname) {
+		// TODO Auto-generated method stub
 		Session session = null;
 		List<Object[]> allNameAndPrice = null;
-		String hql = "select dto.perfumeName, dto.perfumePrice from PerfumeDTO dto where dto.perfumeCompany=:cm";
+		String hql = "select dto.laptopName, dto.laptopPrice from LaptopDTO dto where dto.latopColor=:cm";
 		try {
 			session = HibernateUtil.getSessionFactory().openSession();
 			Query query = session.createQuery(hql);
@@ -239,8 +241,7 @@ public class PerfumeDAOImpl implements PerfumeDAO {
 	@Override
 	public int updatePriceByName(String name, double price) {
 		// TODO Auto-generated method stub
-
-		String hql = "update PerfumeDTO dto set dto.perfumePrice =:pc where dto.perfumeName=:nm";
+		String hql = "update LaptopDTO dto set dto.laptopPrice =:pc where dto.laptopName=:nm";
 
 		try {
 			session = HibernateUtil.getSessionFactory().openSession();
@@ -268,9 +269,9 @@ public class PerfumeDAOImpl implements PerfumeDAO {
 	}
 
 	@Override
-	public int updateCompanyByName(String name, String company) {
+	public int updateColorByName(String name, String color) {
 		// TODO Auto-generated method stub
-		String hql = "update PerfumeDTO dto set dto.perfumeCompany =:pc where dto.perfumeName=:nm ";
+		String hql = "update LaptopDTO dto set dto.laptopColor =:pc where dto.laptopName=:nm ";
 
 		try {
 			session = HibernateUtil.getSessionFactory().openSession();
@@ -278,7 +279,7 @@ public class PerfumeDAOImpl implements PerfumeDAO {
 			Query query = session.createQuery(hql);
 			
 			query.setParameter("pc", name);
-			query.setParameter("nm", company);
+			query.setParameter("nm", color);
 			int r = query.executeUpdate();
 
 			transaction.commit();
@@ -302,7 +303,7 @@ public class PerfumeDAOImpl implements PerfumeDAO {
 	@Override
 	public int deleteByName(String name) {
 		// TODO Auto-generated method stub
-		String hql = "delete from PerfumeDTO dto where dto.perfumeName=:nm";
+		String hql = "delete from LaptopDTO dto where dto.laptopName=:nm";
 
 		try {
 			session = HibernateUtil.getSessionFactory().openSession();
@@ -331,7 +332,7 @@ public class PerfumeDAOImpl implements PerfumeDAO {
 	@Override
 	public int deleteByPrice(double price) {
 		// TODO Auto-generated method stub
-		String hql = "delete from PerfumeDTO dto where dto.perfumePrice=:pc";
+		String hql = "delete from LaptopDTO dto where dto.laptopPrice=:pc";
 
 		try {
 			session = HibernateUtil.getSessionFactory().openSession();
@@ -355,7 +356,6 @@ public class PerfumeDAOImpl implements PerfumeDAO {
 
 		}
 		return 0;
-
 	}
 
 }

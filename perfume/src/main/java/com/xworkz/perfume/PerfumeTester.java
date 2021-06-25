@@ -37,11 +37,21 @@ public class PerfumeTester {
 //		String cn = service.getCompanyNameByPerfumeName("Fogg");
 //		System.out.println(cn);
 		
-		System.out.println("invoked getNameAndPriceByCompany");
-		Object[] object = service.getNameAndPriceByCompany("yardley");
-		for (Object object2 : object) {
-			System.out.println(object2);
-		}
+//		System.out.println("invoked getNameAndPriceByCompany");
+//		Object[] object = service.getNameAndPriceByCompany("yardley");
+//		for (Object object2 : object) {
+//			System.out.println(object2);
+//		}
 		
+//		int i = service.updatePriceByName("Fogg", 300.00);
+//		System.out.println(i);
+//		
+//		int i = service.updateCompanyByName("fff", "Fogg");
+//		System.out.println(i);
+		
+//		int k = service.deleteByName("Ossum");
+//		System.out.println(k);
+	int l = service.deleteByPrice(150.00);
+	System.out.println(l);
 	}
 }

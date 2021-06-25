@@ -19,7 +19,7 @@ public class MovieDTO implements Serializable{
 	@GenericGenerator(name="auto" , strategy = "increment")
 	@GeneratedValue(generator = "auto")
 	
-	private int movie_id;
+	private int movieId;
 	
 	@Column(name="movie_name")
 	private String movieName;
@@ -37,13 +37,16 @@ public class MovieDTO implements Serializable{
 		// TODO Auto-generated constructor stub
 	}
 
-	public int getMovie_id() {
-		return movie_id;
+	
+	public int getMovieId() {
+		return movieId;
 	}
 
-	public void setMovie_id(int movie_id) {
-		this.movie_id = movie_id;
+
+	public void setMovieId(int movieId) {
+		this.movieId = movieId;
 	}
+
 
 	public String getMovieName() {
 		return movieName;
@@ -79,7 +82,7 @@ public class MovieDTO implements Serializable{
 
 	@Override
 	public String toString() {
-		return "MovieDTO [movie_id=" + movie_id + ", movieName=" + movieName + ", language=" + language
+		return "MovieDTO [movieId=" + movieId + ", movieName=" + movieName + ", language=" + language
 				+ ", movieRating=" + movieRating + ", releaseDate=" + releaseDate + "]";
 	}
 	

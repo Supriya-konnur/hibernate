@@ -130,11 +130,12 @@ public class MovieDAOImpl implements MovieDAO {
 	@Override
 	public MovieDTO getMovieByMovieId(int id) {
 		Session session = null;
-		String hql = "select dto from MovieDTO dto where dto.movie_id=" + id + "";
+		String hql = "select dto from MovieDTO dto where dto.movieId=:mid";
 		MovieDTO movieDTO = new MovieDTO();
 		try {
 			session = HibernateUtil.getSessionFactory().openSession();
 			Query query = session.createQuery(hql);
+			query.setParameter("mid", id);
 			movieDTO = (MovieDTO) query.uniqueResult();
 		} catch (Exception e) {
 			// TODO: handle exception
@@ -152,10 +153,11 @@ public class MovieDAOImpl implements MovieDAO {
 	public String getMovieLanguageByMovieName(String movieName) {
 		Session session = null;
 		String movielanguage = null;
-		String hql = "select dto.language from MovieDTO  dto where dto.movieName='" + movieName + "'";
+		String hql = "select dto.language from MovieDTO  dto where dto.movieName=:mName";
 		try {
 			session = HibernateUtil.getSessionFactory().openSession();
 			Query query = session.createQuery(hql);
+			query.setParameter("mName", movieName);
 			movielanguage = (String) query.uniqueResult();
 		} catch (HibernateException e) {
 			e.printStackTrace();
@@ -177,10 +179,11 @@ public class MovieDAOImpl implements MovieDAO {
 	public Object[] getNameAndRatingByLanguage(String language) {
 		Session session = null;
 		Object[] movieNameAndRating = null;
-		String hql = "select dto.movieName, dto.movieRating from MovieDTO dto where dto.language='" + language + "'";
+		String hql = "select dto.movieName, dto.movieRating from MovieDTO dto where dto.language=:lg";
 		try {
 			session = HibernateUtil.getSessionFactory().openSession();
 			Query query = session.createQuery(hql);
+			query.setParameter("lg", language);
 			movieNameAndRating = (Object[]) query.uniqueResult();
 			return movieNameAndRating;
 		} catch (HibernateException e) {
@@ -229,14 +232,22 @@ public class MovieDAOImpl implements MovieDAO {
 	public int updateLanguageByName(String language, String name) {
 		Session session = null;
 		int noOfRowAffected = 0;
-		String hql = "update MovieDTO dto set dto.language='"+language+"' where dto.movieName='"+name+"'";
+		String hql = "update MovieDTO dto set dto.language=:lg where dto.movieName=:mname";
 		try {
 			session = HibernateUtil.getSessionFactory().openSession();
+			transaction = session.beginTransaction();
 			Query query = session.createQuery(hql);
+			query.setParameter("lg", language);
+			query.setParameter("mname", name);
 			noOfRowAffected = query.executeUpdate();
-			
+
+			transaction.commit();
+
+			return noOfRowAffected;
+
 		} catch (HibernateException e) {
 			e.printStackTrace();
+			transaction.rollback();
 		} finally {
 			if (session != null) {
 				session.close();
@@ -249,21 +260,26 @@ public class MovieDAOImpl implements MovieDAO {
 			}
 		}
 
-		return noOfRowAffected;
+		return 0;
 	}
 
 	@Override
 	public int updateRatingByName(int rating, String name) {
 		Session session = null;
 		int noOfRowAffected = 0;
-		String hql = "update MovieDTO dto set dto.movieRating='"+rating+"' where dto.movieName='"+name+"'";
+		String hql = "update MovieDTO dto set dto.movieRating=:rt where dto.movieName=:nm";
 		try {
-			session = HibernateUtil.getSessionFactory().openSession();
+			transaction = session.beginTransaction();
 			Query query = session.createQuery(hql);
+			query.setParameter("rt", rating);
+			query.setParameter("nm", name);
 			noOfRowAffected = query.executeUpdate();
-			
+
+			transaction.commit();
+			return noOfRowAffected;
 		} catch (HibernateException e) {
 			e.printStackTrace();
+			transaction.rollback();
 		} finally {
 			if (session != null) {
 				session.close();
@@ -276,20 +292,27 @@ public class MovieDAOImpl implements MovieDAO {
 			}
 		}
 
-		return noOfRowAffected;
+		return 0;
 	}
+
+	Transaction transaction = null;
 
 	@Override
 	public int deleteMovieByLanguage(String language) {
 		Session session = null;
 		int noOfAffected = 0;
-		String hql = "delete dto from MovieDTO dto where dto.language='"+language+"'";
+		String hql = "delete dto from MovieDTO dto where dto.language=:lg";
 		try {
 			session = HibernateUtil.getSessionFactory().openSession();
+			transaction = session.beginTransaction();
 			Query query = session.createQuery(hql);
+			query.setParameter("lg", language);
 			noOfAffected = query.executeUpdate();
+			transaction.commit();
+			return noOfAffected;
 		} catch (HibernateException e) {
 			e.printStackTrace();
+			transaction.rollback();
 		} finally {
 			if (session != null) {
 				session.close();
@@ -302,8 +325,7 @@ public class MovieDAOImpl implements MovieDAO {
 			}
 		}
 
-
-		return noOfAffected;
+		return 0;
 	}
 
 }

@@ -23,4 +23,13 @@ public interface PerfumeDAO {
 	public Object[] getNameAndPriceByCompany(String pname);
 	
 	public List<Object[]> getAllNameAndPriceByCompany(String cname);
+	
+	int updatePriceByName(String name,double price);
+
+	int updateCompanyByName(String name, String company);
+
+	int deleteByName(String name);
+
+	int deleteByPrice(double price);
+
 }

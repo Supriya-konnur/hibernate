@@ -50,11 +50,13 @@ public class MovieTester {
 //		int i = service.updateLanguageByName("Kannada", "Roberrt");
 //		System.out.println(i);
 		
-//		int j = service.updateRatingByName(3, "Ala Vaikunthapurramuloo");
+//		int j = service.updateRatingByName(5, "Roberrt");
 //		System.out.println(j);
 	
-		int k = service.deleteMovieByLanguage("telugu");
-		System.out.println(k);
+//		int k = service.deleteMovieByLanguage("telugu");
+//		System.out.println(k);
+		
+		
 	
 	}
 
