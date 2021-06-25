@@ -135,11 +135,12 @@ public class CartoonDAOImpl implements CartoonDAO {
 	@Override
 	public CartoonDTO getCartoonByCartoonId(int id) {
 		Session session = null;
-		String hql = "select dto from CartoonDTO dto where dto.cartoonId=" + id + "";
+		String hql = "select dto from CartoonDTO dto where dto.cartoonId=:cid";
 		CartoonDTO cartoonDTO = new CartoonDTO();
 		try {
 			session = HibernateUtil.getSessionFactory().openSession();
 			Query query = session.createQuery(hql);
+			query.setParameter("cid", id);
 			cartoonDTO = (CartoonDTO) query.uniqueResult();
 		} catch (Exception e) {
 			// TODO: handle exception
@@ -157,11 +158,11 @@ public class CartoonDAOImpl implements CartoonDAO {
 	public String getChannelNameByCartoonCharacterName(String characterName) {
 		Session session = null;
 		String cartoonName = null;
-		String hql = "select dto.channelName from CartoonDTO  dto where dto.cartoonCharacterName='" + characterName
-				+ "'";
+		String hql = "select dto.channelName from CartoonDTO  dto where dto.cartoonCharacterName=:cname";
 		try {
 			session = HibernateUtil.getSessionFactory().openSession();
 			Query query = session.createQuery(hql);
+			query.setParameter("cname", characterName);
 			cartoonName = (String) query.uniqueResult();
 		} catch (HibernateException e) {
 			e.printStackTrace();
@@ -183,10 +184,11 @@ public class CartoonDAOImpl implements CartoonDAO {
 	public Object[] getNameAndRatingByChannelName(String cName) {
 		Session session = null;
 		Object[] nameAndRating = null;
-		String hql = "select dto.cartoonCharacterName, dto.rating from CartoonDTO dto where dto.channelName='" + cName+ "'";
+		String hql = "select dto.cartoonCharacterName, dto.rating from CartoonDTO dto where dto.channelName=:cname";
 		try {
 			session = HibernateUtil.getSessionFactory().openSession();
 			Query query = session.createQuery(hql);
+			query.setParameter("cname", cName);
 			nameAndRating = (Object[]) query.uniqueResult();
 			return nameAndRating;
 		} catch (HibernateException e) {
@@ -210,10 +212,11 @@ public class CartoonDAOImpl implements CartoonDAO {
 	public List<Object[]> getAllNameAndRatingByChannelName(String chName) {
 		Session session = null;
 		List<Object[]> allNameAndRating = null;
-		String hql = "select dto.cartoonCharacterName, dto.rating from CartoonDTO dto where dto.channelName='" + chName+ "'";
+		String hql = "select dto.cartoonCharacterName, dto.rating from CartoonDTO dto where dto.channelName=:cname";
 		try {
 			session = HibernateUtil.getSessionFactory().openSession();
 			Query query = session.createQuery(hql);
+			query.setParameter("cname", chName);
 			allNameAndRating = query.list();
 			return allNameAndRating;
 		} catch (HibernateException e) {
