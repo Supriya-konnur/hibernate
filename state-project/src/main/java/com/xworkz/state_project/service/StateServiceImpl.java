@@ -61,5 +61,22 @@ public StateServiceImpl() {
 		// TODO Auto-generated method stub
 		return sDAO.getAllState();
 	}
+	@Override
+	public int updateNoOfDistrictByName(String name, int district) {
+		// TODO Auto-generated method stub
+		if (name != null) {
+			sDAO.updateNoOfDistrictByName(name, district);
+		} 
+		return 0;
+	}
+	@Override
+	public int deleteByName(String name) {
+		// TODO Auto-generated method stub
+		
+		if (name != null) {
+			sDAO.deleteByName(name);
+		}
+		return 0;
+	}
 
 }

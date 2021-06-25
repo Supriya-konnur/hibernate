@@ -69,7 +69,7 @@ public class StateDAOImpl implements StateDAO {
 			transaction = session.beginTransaction();
 
 			StateDTO stateDTO = session.get(StateDTO.class, id);
-			stateDTO.setNo_of_district(district);
+			stateDTO.setNoOfDistrict(district);
 			session.update(stateDTO);
 			transaction.commit();
 
@@ -131,6 +131,67 @@ public class StateDAOImpl implements StateDAO {
 			}
 		}
 		return null;
+	}
+	Transaction transaction =null;
+	@Override
+	public int updateNoOfDistrictByName(String name, int district) {
+		// TODO Auto-generated method stub
+		String hql = "update StateDTO dto set dto.noOfDistrict =:dc where dto.stateName=:nm";
+
+		try {
+			session = HibernateUtil.getSessionFactory().openSession();
+			transaction = session.beginTransaction();
+			Query query = session.createQuery(hql);
+			query.setParameter("dc", district);
+			query.setParameter("nm", name);
+			int r = query.executeUpdate();
+
+			transaction.commit();
+			return r;
+		} catch (HibernateException e) {
+			e.printStackTrace();
+			transaction.rollback();
+		} finally {
+			if (session != null) {
+				session.close();
+			}
+			if (HibernateUtil.getSessionFactory() != null) {
+				HibernateUtil.getSessionFactory().close();
+			}
+
+		}
+		return 0;
+	}
+
+	@Override
+	public int deleteByName(String name) {
+		// TODO Auto-generated method stub
+		
+		String hql = "delete from StateDTO dto where dto.stateName=:nm";
+
+		
+		try {
+			session = HibernateUtil.getSessionFactory().openSession();
+			transaction  = session.beginTransaction();
+			Query query = session.createQuery(hql);
+			query.setParameter("nm", name);
+			int n = query.executeUpdate();
+
+			transaction.commit();
+			return n;
+		} catch (HibernateException e) {
+			e.printStackTrace();
+			transaction.rollback();
+		} finally {
+			if (session != null) {
+				session.close();
+			}
+			if (HibernateUtil.getSessionFactory() != null) {
+				HibernateUtil.getSessionFactory().close();
+			}
+
+		}
+		return 0;
 	}
 
 }

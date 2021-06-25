@@ -15,4 +15,9 @@ public interface StateDAO {
 	public void deleteByName(int id, String name);
 	
 	public List<StateDTO> getAllState();
+	
+	int updateNoOfDistrictByName(String name, int district);
+
+	int deleteByName(String name);
+
 }

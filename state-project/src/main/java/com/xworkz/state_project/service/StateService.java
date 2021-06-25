@@ -15,4 +15,8 @@ public interface StateService {
 	public void validateAndDelete(int id, String name);
 	
 	public List<StateDTO> getAllState();
+
+	int updateNoOfDistrictByName(String name, int district);
+
+	int deleteByName(String name);
 }

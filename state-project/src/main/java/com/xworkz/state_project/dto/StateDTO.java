@@ -18,19 +18,19 @@ public class StateDTO implements Serializable{
 	@GenericGenerator(name="auto" , strategy = "increment")
 	@GeneratedValue(generator = "auto")
 	
-	private int state_id;
+	private int stateId;
 	
 	@Column(name="state_name")
-	private String state_name;
+	private String stateName;
 	
 	@Column(name="language")
 	private String language;
 	
 	@Column(name="capital_name")
-	private String capital_name;
+	private String capitalName;
 	
 	@Column(name="no_of_district")
-	private int no_of_district;
+	private int noOfDistrict;
 	
 	
 	public StateDTO() {
@@ -38,23 +38,23 @@ public class StateDTO implements Serializable{
 	}
 
 
-	public int getState_id() {
-		return state_id;
+	public int getStateId() {
+		return stateId;
 	}
 
 
-	public void setState_id(int state_id) {
-		this.state_id = state_id;
+	public void setStateId(int stateId) {
+		this.stateId = stateId;
 	}
 
 
-	public String getState_name() {
-		return state_name;
+	public String getStateName() {
+		return stateName;
 	}
 
 
-	public void setState_name(String state_name) {
-		this.state_name = state_name;
+	public void setStateName(String stateName) {
+		this.stateName = stateName;
 	}
 
 
@@ -68,31 +68,38 @@ public class StateDTO implements Serializable{
 	}
 
 
-	public String getCapital_name() {
-		return capital_name;
+	public String getCapitalName() {
+		return capitalName;
 	}
 
 
-	public void setCapital_name(String capital_name) {
-		this.capital_name = capital_name;
+	public void setCapitalName(String capitalName) {
+		this.capitalName = capitalName;
 	}
 
 
-	public int getNo_of_district() {
-		return no_of_district;
+	public int getNoOfDistrict() {
+		return noOfDistrict;
 	}
 
 
-	public void setNo_of_district(int no_of_district) {
-		this.no_of_district = no_of_district;
+	public void setNoOfDistrict(int noOfDistrict) {
+		this.noOfDistrict = noOfDistrict;
 	}
 
 
 	@Override
 	public String toString() {
-		return "StateDTO [state_id=" + state_id + ", state_name=" + state_name + ", language=" + language
-				+ ", capital_name=" + capital_name + ", no_of_district=" + no_of_district + "]";
+		return "StateDTO [stateId=" + stateId + ", stateName=" + stateName + ", language=" + language + ", capitalName="
+				+ capitalName + ", noOfDistrict=" + noOfDistrict + "]";
 	}
+
+
+	
+
 	
 	
+
+
+		
 }

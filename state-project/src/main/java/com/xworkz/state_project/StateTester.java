@@ -11,10 +11,10 @@ public class StateTester {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		StateDTO dto = new StateDTO();
-		dto.setState_name("Kerala");
+		dto.setStateName("Kerala");
 		dto.setLanguage("Malayalam");
-		dto.setCapital_name("Thiruvananthapuram");
-		dto.setNo_of_district(11);
+		dto.setCapitalName("Thiruvananthapuram");
+		dto.setNoOfDistrict(11);
 
 		StateService service =new StateServiceImpl();
 		//service.valideAndSave(dto);
@@ -26,9 +26,15 @@ public class StateTester {
 //		
 //		service.validateAndDelete(4, "Maharastra");
 		
-		List<StateDTO> dtos = service.getAllState();
+//		List<StateDTO> dtos = service.getAllState();
+//		
+//		dtos.forEach(System.out::println);
 		
-		dtos.forEach(System.out::println);
+//		int i = service.updateNoOfDistrictByName("Kerala", 12);
+//		System.out.println(i);
+
+//		int k = service.deleteByName("Kerala");
+//		System.out.println(k);
 	}
 
 }
