@@ -13,6 +13,7 @@ import javax.persistence.Table;
 public class BluetoothDTO implements Serializable {
 
 @Id
+
 @Column(name="bluetooth_id")
 private int bluetoothId;
 

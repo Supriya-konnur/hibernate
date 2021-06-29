@@ -26,6 +26,7 @@ public class BluetoothDAOImp implements BluetoothDAO{
 		session.close();
 		factory.close();
 		
+		
 	}
 
 	@Override

@@ -81,8 +81,6 @@ public class SupermarketDTO implements Serializable{
 		return "SupermarketDTO [id=" + id + ", supermarket_name=" + supermarket_name + ", item_name=" + item_name
 				+ ", no_of_items=" + no_of_items + ", price=" + price + "]";
 	}
-
-	
 	
 	
 }

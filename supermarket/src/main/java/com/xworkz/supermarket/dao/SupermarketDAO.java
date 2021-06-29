@@ -11,4 +11,5 @@ public interface SupermarketDAO {
 	public void updatePriceByName(int id, String name, double price);
 
 	public void deleteByName(int id, String name);
+	
 }
