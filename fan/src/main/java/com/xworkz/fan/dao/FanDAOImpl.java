@@ -113,7 +113,8 @@ public class FanDAOImpl implements FanDAO {
 		// TODO Auto-generated method stub
 		try {
 			session = HibernateUtil.getSessionFactory().openSession();
-			Query query = session.createQuery("select dto from FanDTO dto");
+//			Query query = session.createQuery("select dto from FanDTO dto");
+			Query query = session.getNamedQuery("getAllFan");
 			List<FanDTO> dtos = query.list();
 			return dtos;
 		} catch (Exception e) {
@@ -130,11 +131,11 @@ public class FanDAOImpl implements FanDAO {
 	@Override
 	public FanDTO getFanByFanId(int id) {
 		// TODO Auto-generated method stub
-		String hql = "select dto from FanDTO dto where dto.fanId=:pid";
+//		String hql = "select dto from FanDTO dto where dto.fanId=:pid";
 		FanDTO fanDTO = new FanDTO();
 		try {
 			session = HibernateUtil.getSessionFactory().openSession();
-			Query query = session.createQuery(hql);
+			Query query = session.getNamedQuery("getFanByFanId");
 			query.setParameter("pid", id);
 			fanDTO = (FanDTO) query.uniqueResult();
 		} catch (Exception e) {
@@ -154,10 +155,10 @@ public class FanDAOImpl implements FanDAO {
 	public String getColorByFanName(String fanName) {
 		// TODO Auto-generated method stub
 		String cName = null;
-		String hql = "select dto.fanColor from FanDTO  dto where dto.fanName=:pm";
+//		String hql = "select dto.fanColor from FanDTO  dto where dto.fanName=:pm";
 		try {
 			session = HibernateUtil.getSessionFactory().openSession();
-			Query query = session.createQuery(hql);
+			Query query = session.getNamedQuery("getColorByFanName");
 			query.setParameter("pm", fanName);
 			cName = (String) query.uniqueResult();
 		} catch (HibernateException e) {
@@ -179,10 +180,10 @@ public class FanDAOImpl implements FanDAO {
 	@Override
 	public Object[] getNameAndPriceByColor(String fname) {
 		Object[] nameAndPrice = null;
-		String hql = "select dto.fanName, dto.fanPrice from FanDTO dto where dto.fanColor=:pc";
+//		String hql = "select dto.fanName, dto.fanPrice from FanDTO dto where dto.fanColor=:pc";
 		try {
 			session = HibernateUtil.getSessionFactory().openSession();
-			Query query = session.createQuery(hql);
+			Query query = session.getNamedQuery("getNameAndPriceByColor");
 			query.setParameter("pc", fname);
 			nameAndPrice = (Object[]) query.uniqueResult();
 			return nameAndPrice;
@@ -206,10 +207,10 @@ public class FanDAOImpl implements FanDAO {
 	@Override
 	public List<Object[]> getAllNameAndPriceByColor(String color) {
 		List<Object[]> allNameAndPrice = null;
-		String hql = "select dto.fanName, dto.fanPrice from FanDTO dto where dto.fanColor=:cm";
+//		String hql = "select dto.fanName, dto.fanPrice from FanDTO dto where dto.fanColor=:cm";
 		try {
 			session = HibernateUtil.getSessionFactory().openSession();
-			Query query = session.createQuery(hql);
+			Query query = session.getNamedQuery("getAllNameAndPriceByColor");
 			query.setParameter("cm", color);
 			allNameAndPrice = (List<Object[]>) query.list();
 			return allNameAndPrice;
@@ -232,12 +233,12 @@ public class FanDAOImpl implements FanDAO {
 	@Override
 	public int updatePriceByName(String name, double price) {
 		// TODO Auto-generated method stub
-		String hql = "update FanDTO dto set dto.fanPrice=:pc where dto.fanName=:nm";
+//		String hql = "update FanDTO dto set dto.fanPrice=:pc where dto.fanName=:nm";
 
 		try {
 			session = HibernateUtil.getSessionFactory().openSession();
 			transaction = session.beginTransaction();
-			Query query = session.createQuery(hql);
+			Query query = session.getNamedQuery("updatePriceByName");
 			query.setParameter("pc", price);
 			query.setParameter("nm", name);
 			int r = query.executeUpdate();
@@ -262,12 +263,12 @@ public class FanDAOImpl implements FanDAO {
 	@Override
 	public int updateColorByName(String name, String color) {
 		// TODO Auto-generated method stub
-		String hql = "update FanDTO dto set dto.fanColor=:pc where dto.fanName=:nm ";
+//		String hql = "update FanDTO dto set dto.fanColor=:pc where dto.fanName=:nm ";
 
 		try {
 			session = HibernateUtil.getSessionFactory().openSession();
 			transaction = session.beginTransaction();
-			Query query = session.createQuery(hql);
+			Query query = session.getNamedQuery("updateColorByName");
 			
 			query.setParameter("pc", name);
 			query.setParameter("nm", color);
@@ -294,12 +295,12 @@ public class FanDAOImpl implements FanDAO {
 	@Override
 	public int deleteByName(String name) {
 		// TODO Auto-generated method stub
-		String hql = "delete from FanDTO dto where dto.fanName=:nm";
+//		String hql = "delete from FanDTO dto where dto.fanName=:nm";
 
 		try {
 			session = HibernateUtil.getSessionFactory().openSession();
 			transaction = session.beginTransaction();
-			Query query = session.createQuery(hql);
+			Query query = session.getNamedQuery("deleteByName");
 			query.setParameter("nm", name);
 			int n = query.executeUpdate();
 
@@ -323,12 +324,12 @@ public class FanDAOImpl implements FanDAO {
 	@Override
 	public int deleteByPrice(double price) {
 		// TODO Auto-generated method stub
-		String hql = "delete from FanDTO dto where dto.fanPrice=:pc";
+//		String hql = "delete from FanDTO dto where dto.fanPrice=:pc";
 
 		try {
 			session = HibernateUtil.getSessionFactory().openSession();
 			transaction = session.beginTransaction();
-			Query query = session.createQuery(hql);
+			Query query = session.getNamedQuery("deleteByPrice");
 			query.setParameter("pc", price);
 			int n = query.executeUpdate();
 

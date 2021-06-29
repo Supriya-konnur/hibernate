@@ -6,12 +6,25 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.GenericGenerator;
 
 @Entity
 @Table(name = "laptop")
+@NamedQueries({
+	@NamedQuery(name="getAllLoptop", query="select dto from LaptopDTO dto"),
+	@NamedQuery(name="getLaptopByLaptopId", query="select dto from LaptopDTO dto where dto.laptopId=:pid"),
+	@NamedQuery(name="getColorByLaptopName", query="select dto.laptopColor from LaptopDTO  dto where dto.laptopName=:pm"),
+	@NamedQuery(name="getNameAndPriceByColor", query="select dto.laptopName, dto.laptopPrice from LaptopDTO dto where dto.laptopColor=:pc"),
+	@NamedQuery(name="getAllNameAndPriceByColor", query="select dto.laptopName, dto.laptopPrice from LaptopDTO dto where dto.latopColor=:cm"),
+	@NamedQuery(name="updatePriceByName", query="update LaptopDTO dto set dto.laptopPrice =:pc where dto.laptopName=:nm"),
+	@NamedQuery(name="updateColorByName", query="update LaptopDTO dto set dto.laptopColor =:pc where dto.laptopName=:nm"),
+	@NamedQuery(name="deleteByName", query="delete from LaptopDTO dto where dto.laptopName=:nm"),
+	@NamedQuery(name="deleteByPrice" ,query="delete from LaptopDTO dto where dto.laptopPrice=:pc")
+})
 
 public class LaptopDTO implements Serializable {
 	@Id

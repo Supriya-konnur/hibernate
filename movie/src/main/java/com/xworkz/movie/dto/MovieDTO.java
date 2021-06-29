@@ -6,19 +6,30 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.GenericGenerator;
 @Entity
 @Table(name="movie")
+@NamedQueries({
+	@NamedQuery(name="getAllMovies", query="select dto from MovieDTO dto"),
+	@NamedQuery(name="getMovieByMovieId", query="select dto from MovieDTO dto where dto.movieId=:mid"),
+	@NamedQuery(name="getMovieLanguageByMovieName", query="select dto.language from MovieDTO  dto where dto.movieName=:mName"),
+	@NamedQuery(name="getNameAndRatingByLanguage", query="select dto.movieName, dto.movieRating from MovieDTO dto where dto.language=:lg"),
+	@NamedQuery(name="getNameAndRatingByLanguage", query="select dto.movieName, dto.movieRating from MovieDTO dto"),
+	@NamedQuery(name="updateLanguageByName", query="update MovieDTO dto set dto.language=:lg where dto.movieName=:mname"),
+	@NamedQuery(name="updateRatingByName", query="update MovieDTO dto set dto.movieRating=:rt where dto.movieName=:nm"),
+	@NamedQuery(name="deleteMovieByLanguage", query="delete dto from MovieDTO dto where dto.language=:lg")
+})
 public class MovieDTO implements Serializable{
 
 	@Id
-	
-	@Column(name="movie_id")
 	@GenericGenerator(name="auto" , strategy = "increment")
 	@GeneratedValue(generator = "auto")
 	
+	@Column(name="movie_id")
 	private int movieId;
 	
 	@Column(name="movie_name")

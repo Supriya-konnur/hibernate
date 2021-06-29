@@ -119,7 +119,7 @@ public class StateDAOImpl implements StateDAO {
 		Session session = null;
 		try {
 			session = HibernateUtil.getSessionFactory().openSession();
-			Query query =session.createQuery("select dto from StateDTO dto");
+			Query query =session.getNamedQuery("getAllState");
 			List<StateDTO> dtos = query.list();
 			return dtos;
 		}catch(Exception e){
@@ -136,12 +136,12 @@ public class StateDAOImpl implements StateDAO {
 	@Override
 	public int updateNoOfDistrictByName(String name, int district) {
 		// TODO Auto-generated method stub
-		String hql = "update StateDTO dto set dto.noOfDistrict =:dc where dto.stateName=:nm";
+//		String hql = "update StateDTO dto set dto.noOfDistrict =:dc where dto.stateName=:nm";
 
 		try {
 			session = HibernateUtil.getSessionFactory().openSession();
 			transaction = session.beginTransaction();
-			Query query = session.createQuery(hql);
+			Query query = session.getNamedQuery("updateNoOfDistrictByName");
 			query.setParameter("dc", district);
 			query.setParameter("nm", name);
 			int r = query.executeUpdate();
@@ -167,13 +167,13 @@ public class StateDAOImpl implements StateDAO {
 	public int deleteByName(String name) {
 		// TODO Auto-generated method stub
 		
-		String hql = "delete from StateDTO dto where dto.stateName=:nm";
+//		String hql = "delete from StateDTO dto where dto.stateName=:nm";
 
 		
 		try {
 			session = HibernateUtil.getSessionFactory().openSession();
 			transaction  = session.beginTransaction();
-			Query query = session.createQuery(hql);
+			Query query = session.getNamedQuery("deleteByName");
 			query.setParameter("nm", name);
 			int n = query.executeUpdate();
 

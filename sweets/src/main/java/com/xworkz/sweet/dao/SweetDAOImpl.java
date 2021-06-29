@@ -109,7 +109,6 @@ public class SweetDAOImpl implements SweetDAO {
 				sessionFactory.close();
 				}
 			
-			
 		}
 
 	}

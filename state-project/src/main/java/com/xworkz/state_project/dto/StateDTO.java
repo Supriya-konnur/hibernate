@@ -6,11 +6,19 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.GenericGenerator;
 @Entity
 @Table(name="state")
+@NamedQueries({
+	@NamedQuery(name="getAllState", query="select dto from StateDTO dto"),
+	@NamedQuery(name="updateNoOfDistrictByName", query="update StateDTO dto set dto.noOfDistrict =:dc where dto.stateName=:nm"),
+	@NamedQuery(name="deleteByName", query="delete from StateDTO dto where dto.stateName=:nm"),
+	
+})
 public class StateDTO implements Serializable{
 
 	@Id
