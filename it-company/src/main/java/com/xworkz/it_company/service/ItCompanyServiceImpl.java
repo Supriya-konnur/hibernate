@@ -1,5 +1,7 @@
 package com.xworkz.it_company.service;
 
+import java.util.List;
+
 import com.xworkz.it_company.dao.ItCompanyDAO;
 import com.xworkz.it_company.dao.ItCompanyDAOImpl;
 import com.xworkz.it_company.dto.ItCompanyDTO;
@@ -61,6 +63,11 @@ public class ItCompanyServiceImpl implements ItCompanyService{
 		} else {
 			System.out.println("Name cant be null");
 		}
+	}
+	@Override
+	public List<ItCompanyDTO> getAllItCompany() {
+		// TODO Auto-generated method stub
+		return iDAO.getAllItCompany();
 	}
 
 }

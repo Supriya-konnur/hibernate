@@ -4,12 +4,14 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.GenericGenerator;
 
 @Entity
 @Table(name = "it_company")
+@NamedQuery(name="getAllItCompany", query="select dto from LaptopDTO dto")
 public class ItCompanyDTO {
 	@Id
 	@Column(name = "it_company_id")

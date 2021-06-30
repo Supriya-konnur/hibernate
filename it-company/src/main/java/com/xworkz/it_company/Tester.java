@@ -1,5 +1,7 @@
 package com.xworkz.it_company;
 
+import java.util.List;
+
 import com.xworkz.it_company.dto.ItCompanyDTO;
 import com.xworkz.it_company.service.ItCompanyService;
 import com.xworkz.it_company.service.ItCompanyServiceImpl;
@@ -23,7 +25,10 @@ public class Tester {
 //		
 //		service.validateAndMerge(4, "Infosys", 5);
 		
-		service.validateAndEvict(2, "Accenture");
+//		service.validateAndEvict(2, "Accenture");
+		
+		List<ItCompanyDTO> dtos = service.getAllItCompany();
+		System.out.println(dtos);
 	}
 
 }
